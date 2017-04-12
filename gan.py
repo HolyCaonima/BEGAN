@@ -61,6 +61,8 @@ class GAN(object):
         self.g_out = generator_template.construct(input=z)
         real_disc_inst = discriminator_template.construct(input=input_img)
         fake_disc_inst = discriminator_template.construct(input=self.g_out)
+        # introduce the discriminator`s output
+        self.gd_out = fake_disc_inst
 
         mu_real = tf.reduce_mean(tf.abs(real_disc_inst - input_img))
         mu_gen = tf.reduce_mean(tf.abs(fake_disc_inst - self.g_out))
@@ -85,10 +87,10 @@ class GAN(object):
         self.sess.run(self.opt_d, feed_dict={self.k_ph:in_k})
         self.sess.run(self.opt_g)
         ret_k = self.sess.run(self.out_k, feed_dict={self.k_ph:in_k})
-        if ret_k>1:
-            ret_k = 1.
         if ret_k<0:
             ret_k = 0.
+        if ret_k>1:
+            ret_k = 1.
         return ret_k
 
     def get_loss(self):
@@ -119,6 +121,16 @@ class GAN(object):
                 os.makedirs(imgs_folder) 
             imsave(os.path.join(imgs_folder, '%d.png') % k, slice_img)
         imsave(os.path.join(imgs_folder,"Agg.png"), big_img)
+
+        big_img = np.zeros([im_w*imsize[1],im_w*imsize[0],3])
+        imgs = self.sess.run(self.gd_out)
+        while imgs.shape[0]<num_samples:
+            tmp = self.sess.run(self.gd_out)
+            imgs = np.concatenate((imgs, tmp), axis=0)
+        for k in range(num_samples):
+            slice_img = imgs[k].reshape(imsize[1], imsize[0], 3)
+            big_img[(k/im_w)*imsize[1]:((k/im_w)+1)*imsize[1], (k%im_w)*imsize[0]:((k%im_w)+1)*imsize[0],:] = slice_img
+        imsave(os.path.join(imgs_folder,"Agg_d.png"), big_img)
     
     def get_merged_image(self, num_samples):
         imsize = self.img_size
