@@ -17,6 +17,32 @@ Paper: [BEGAN: Boundary Equilibrium Generative Adversarial Networks](https://arx
 
 ## Usage
 
+
+First download [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) datasets with:
+
+    $ apt-get install p7zip-full # ubuntu
+    $ brew install p7zip # Mac
+    $ python download.py
+
+or you can use your own dataset by placing images like:
+
+    data
+    └── YOUR_DATASET_NAME
+        ├── xxx.jpg (name doesn't matter)
+        ├── yyy.jpg
+        └── ...
+
+To train a model:
+
+    $ python main.py --dataset=CelebA --use_gpu=True
+    $ python main.py --dataset=YOUR_DATASET_NAME --use_gpu=True
+
+To test a model (use your `load_path`):
+
+    $ python main.py --dataset=CelebA --load_path=CelebA_0405_124806 --use_gpu=True --is_train=False --split valid
+
+
+
 1. First, download the [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) dataset
 
 2. Second, extract the dataset and cut the image into 64x64
