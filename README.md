@@ -8,9 +8,9 @@ Paper: [BEGAN: Boundary Equilibrium Generative Adversarial Networks](https://arx
 ## Requirements
 
 - Python 2.7
-- Pillow
-- prettytensor
-- scipy
+- [Pillow](https://pillow.readthedocs.io/en/4.0.x/)
+- [prettytensor](https://github.com/google/prettytensor)
+- [scipy](https://github.com/scipy/scipy)
 - progressbar
 - TensorFlow 0.2.0 (or higher)
 
