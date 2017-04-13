@@ -42,15 +42,15 @@ Paper[BEGAN: Boundary Equilibrium Generative Adversarial Networks](https://arxiv
 
 ### Autoencoded Generator outputs (after only 3k step)
 
-<img src="./readme/Agg_d.png" width="80%">
+<img src="./readme/Agg_d.png" width="60%">
 
 
 ### Generator and Discriminator outputs (after only 3k step)
 
-<img src="./readme/Agg.png" width="80%">
+<img src="./readme/Agg.png" width="60%">
 
 
-for lack of training the model is still far more training
+For lack of training the model is still far from convergence.
 ## Author
 
 Yuletian
