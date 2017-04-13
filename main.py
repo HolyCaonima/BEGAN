@@ -30,8 +30,9 @@ flags.DEFINE_integer("max_epoch", 500, "max epoch")
 flags.DEFINE_string("working_directory", "./work", "the working directory of current job")
 flags.DEFINE_string("data_directory", "./tmp/data", "directory of training data")
 flags.DEFINE_integer("hidden_size", 128, "the size of hidden space")
-flags.DEFINE_float("learning_rate", 0.00005, "learning rate")
+flags.DEFINE_float("learning_rate", 0.0001, "learning rate")
 flags.DEFINE_integer("version", 1, "the version of model")
+flags.DEFINE_integer("lr_update", 100000, "the learning rate update after steps")
 
 FLAGS = flags.FLAGS
 
@@ -54,6 +55,7 @@ def save_model(sess, saver):
     model_desc.write(str(FLAGS.data_directory)+"\n")
     model_desc.write(str(FLAGS.hidden_size)+"\n")
     model_desc.write(str(FLAGS.learning_rate)+"\n")
+    model_desc.write(str(FLAGS.lr_update)+"\n")
     model_desc.write(str(start_epoch)+"\n")
     model_desc.write(str(k_p)+"\n")
     saver.save(sess, os.path.join(FLAGS.working_directory,"save","model.data"))
@@ -75,6 +77,7 @@ def load_desc():
     FLAGS.data_directory = str(model_desc.readline()).replace("\n","")
     FLAGS.hidden_size = int(model_desc.readline())
     FLAGS.learning_rate = float(model_desc.readline())
+    FLAGS.lr_update = int(model_desc.readline())
     start_epoch = int(model_desc.readline())
     k_p = float(model_desc.readline())
     model_desc.close()
@@ -115,8 +118,12 @@ def main():
     for epoch in range(start_epoch, FLAGS.max_epoch):
         pbar = ProgressBar()
         for update in pbar(range(FLAGS.updates_per_epoch)):
-            k_p = gan.update_params(FLAGS.global_step, k_p, FLAGS.d_iter, FLAGS.g_iter)
+            k_p = gan.update_params(FLAGS.global_step, FLAGS.learning_rate, k_p)
             FLAGS.global_step = FLAGS.global_step + 1
+
+            if FLAGS.global_step % FLAGS.lr_update == FLAGS.lr_update - 1:
+                FLAGS.learning_rate = FLAGS.learning_rate*0.5
+                print "update learning rate:"+str(FLAGS.learning_rate)
         
         cm = gan.get_loss()
         print "loss: " + str(cm)

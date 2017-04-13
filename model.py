@@ -43,7 +43,7 @@ def build_discriminator_template(version, hidden_size):
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu, batch_normalize=True)
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu, batch_normalize=True)
 
-        discriminator = discriminator.conv2d(3, 3).apply(tf.sigmoid)
+        discriminator = discriminator.conv2d(3, 3).apply(tf.nn.tanh)
         
     return discriminator
 
@@ -68,6 +68,6 @@ def build_generator_template(version, hidden_size):
         generator = generator.conv2d(3, num_filters, tf.nn.elu, batch_normalize=True)
         generator = generator.conv2d(3, num_filters, tf.nn.elu, batch_normalize=True)
 
-        generator = generator.conv2d(3, 3).apply(tf.sigmoid)
+        generator = generator.conv2d(3, 3).apply(tf.nn.tanh)
 
     return generator

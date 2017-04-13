@@ -19,7 +19,7 @@ def read_and_decode2(filename_queue, img_size):
     #image = tf.reshape(image, [32, 32, 3])
 
     # normalize
-    image = image / 255.
+    image = image * (2. / 255.) - 1
 
     return image
 

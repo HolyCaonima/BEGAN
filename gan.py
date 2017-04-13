@@ -31,10 +31,10 @@ class GAN(object):
         self.clip_abs = clip_abs
         self.hidden_size = hidden_size
         self.batch_size = batch_size
-        self.learning_rate = learning_rate
         self.data_directory = data_directory
         self.log_directory = log_directory
 
+        self.learning_rate = tf.placeholder(tf.float32, shape=[]) 
         # build the graph
         self._build_graph()
         self.merged_all = tf.summary.merge_all()
@@ -47,7 +47,7 @@ class GAN(object):
     def _build_graph(self):
         self.k_ph = tf.placeholder(tf.float32, shape=[])
         # build up the hidden Z
-        z = tf.truncated_normal([self.batch_size, self.hidden_size])
+        z = tf.random_uniform([self.batch_size, self.hidden_size], -1, 1)
         input_img = customDataGeter.input(self.data_directory, self.img_size, self.batch_size)
 
         # the training step
@@ -81,11 +81,10 @@ class GAN(object):
         self.opt_g = tf.train.AdamOptimizer(self.learning_rate, beta1=0.5).minimize(self.G_loss, global_step,
                                             var_list=tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES, 'generator'))
 
-
-    def update_params(self, current_step, in_k, d_step = 1, g_step = 1):
+    def update_params(self, current_step, lr, in_k):
         # train citers 
-        self.sess.run(self.opt_d, feed_dict={self.k_ph:in_k})
-        self.sess.run(self.opt_g)
+        self.sess.run(self.opt_d, feed_dict={self.k_ph:in_k, self.learning_rate:lr})
+        self.sess.run(self.opt_g, feed_dict={self.learning_rate:lr})
         ret_k = self.sess.run(self.out_k, feed_dict={self.k_ph:in_k})
         if ret_k<0:
             ret_k = 0.
