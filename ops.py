@@ -74,7 +74,10 @@ def upsample_bilinear_2x(input):
 class upsample2x(pt.VarStoreMethod):
     def __call__(self, input_layer, name="updample2x"):
         with tf.variable_scope(name):
-            return upsample_bilinear_2x(input_layer)
+            output_shape = input_layer.get_shape().as_list()
+            output_shape[1] = output_shape[1]*2
+            output_shape[2] = output_shape[2]*2
+            return tf.image.resize_nearest_neighbor(input_layer, (output_shape[1], output_shape[2]))
 
 @pt.Register
 class upsample_conv(pt.VarStoreMethod):

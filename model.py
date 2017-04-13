@@ -5,9 +5,12 @@ import prettytensor as pt
 import ops
 
 def build_discriminator_template(version, hidden_size):
-    num_filters = 64
+    num_filters = 128
     with tf.variable_scope('discriminator'):
         discriminator = pt.template('input')
+
+        discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu)
+
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu)
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu)
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu, [2, 2])
@@ -22,7 +25,6 @@ def build_discriminator_template(version, hidden_size):
 
         discriminator = discriminator.conv2d(3, num_filters*4, tf.nn.elu)
         discriminator = discriminator.conv2d(3, num_filters*4, tf.nn.elu)
-        discriminator = discriminator.conv2d(3, num_filters*4, tf.nn.elu, [2, 2])
 
         # flatten for fc
         discriminator = discriminator.flatten()
@@ -30,7 +32,7 @@ def build_discriminator_template(version, hidden_size):
 
         discriminator = discriminator.fully_connected(8*8*num_filters)
         discriminator = discriminator.reshape([-1, 8, 8, num_filters])
-        
+
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu)
         discriminator = discriminator.conv2d(3, num_filters, tf.nn.elu)
         discriminator = discriminator.upsample2x()
@@ -51,7 +53,7 @@ def build_discriminator_template(version, hidden_size):
     return discriminator
 
 def build_generator_template(version, hidden_size):
-    num_filters = 64
+    num_filters = 128
     with tf.variable_scope('generator'):
         generator = pt.template('input')
 

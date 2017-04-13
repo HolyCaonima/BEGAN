@@ -29,7 +29,7 @@ flags.DEFINE_integer("updates_per_epoch", 100, "update certain times then show t
 flags.DEFINE_integer("max_epoch", 500, "max epoch")
 flags.DEFINE_string("working_directory", "./work", "the working directory of current job")
 flags.DEFINE_string("data_directory", "./tmp/data", "directory of training data")
-flags.DEFINE_integer("hidden_size", 128, "the size of hidden space")
+flags.DEFINE_integer("hidden_size", 64, "the size of hidden space")
 flags.DEFINE_float("learning_rate", 0.0001, "learning rate")
 flags.DEFINE_integer("version", 1, "the version of model")
 flags.DEFINE_integer("lr_update", 100000, "the learning rate update after steps")
