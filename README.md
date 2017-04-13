@@ -49,27 +49,27 @@ Sixth, the model will be train and saved every 100 batch. You can continue your 
 
 ## Results
 
-### [CelebA dataset] Autoencoded outputs (after only 11k step)
+### [CelebA dataset] Autoencoded outputs (only after 11k step)
 
 <img src="./readme/Agg_d.png" width="50%">
 
 
-### [CelebA dataset] Generator outputs (after only 11k step)
+### [CelebA dataset] Generator outputs (only after 11k step)
 
 <img src="./readme/Agg.png" width="50%">
 
 
-### [Mnist dataset] Autoencoded outputs (after only 3.4k step)
+### [Mnist dataset] Autoencoded outputs (only after 3.4k step)
 
 <img src="./readme/Agg_d_mnist.png" width="50%">
 
 
-### [Mnist dataset] Generator outputs (after only 3.4k step)
+### [Mnist dataset] Generator outputs (only after 3.4k step)
 
 <img src="./readme/Agg_mnist.png" width="50%">
 
 
-### [custom dataset] Autoencoded outputs (after only 1.2k step)
+### [custom dataset] Autoencoded outputs (only after 1.2k step)
 
 <img src="./readme/Agg_d_cust.png" width="50%">
 
