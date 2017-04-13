@@ -71,6 +71,12 @@ def upsample_bilinear_2x(input):
     return depthwise_conv2d_transpose(input, f, output_shape, [1,2,2,1])
 
 @pt.Register
+class upsample2x(pt.VarStoreMethod):
+    def __call__(self, input_layer, name="updample2x"):
+        with tf.variable_scope(name):
+            return upsample_bilinear_2x(input_layer)
+
+@pt.Register
 class upsample_conv(pt.VarStoreMethod):
     def __call__(self, input_layer, kernel, depth, padding='SAME', name="upsample_conv"):
         with tf.variable_scope(name):
