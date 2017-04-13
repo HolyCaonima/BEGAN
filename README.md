@@ -3,7 +3,7 @@
 Paper[BEGAN: Boundary Equilibrium Generative Adversarial Networks](https://arxiv.org/abs/1703.10717).
 
 ![alt tag](./readme/network.png)
-
+![alt tag](./readme/paperresult.png)
 
 ## Requirements
 
