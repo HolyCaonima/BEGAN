@@ -84,7 +84,7 @@ My custom dataset is a set of shotcut built from over 156 cartoon videos.
 BEGAN can not show any convergence clues in mine custom dataset.
 However dcgan with batch discriminator can convergent on that.
 
-### [custom dataset] Generator outputs (after 148k step)
+### [custom dataset] DCGAN+BD Generator outputs (after 148k step)
 
 ![alt tag](./readme/Agg_148400.png)
 
