@@ -44,27 +44,27 @@ Paper[BEGAN: Boundary Equilibrium Generative Adversarial Networks](https://arxiv
 
 ## Results
 
-### [CelebA dataset] Autoencoded Generator outputs (after only 6.2k step)
+### [CelebA dataset] Autoencoded outputs (after only 6.2k step)
 
 <img src="./readme/Agg_d.png" width="50%">
 
 
-### [CelebA dataset] Generator and Discriminator outputs (after only 6.2k step)
+### [CelebA dataset] Generator outputs (after only 6.2k step)
 
 <img src="./readme/Agg.png" width="50%">
 
 
-### [Mnist dataset] Autoencoded Generator outputs (after only 3.4k step)
+### [Mnist dataset] Autoencoded outputs (after only 3.4k step)
 
 <img src="./readme/Agg_d_mnist.png" width="50%">
 
 
-### [Mnist dataset] Generator and Discriminator outputs (after only 3.4k step)
+### [Mnist dataset] Generator outputs (after only 3.4k step)
 
 <img src="./readme/Agg_mnist.png" width="50%">
 
 
-### [custom dataset] Autoencoded Generator outputs (after only 1.2k step)
+### [custom dataset] Autoencoded outputs (after only 1.2k step)
 
 <img src="./readme/Agg_d_cust.png" width="50%">
 
@@ -78,6 +78,10 @@ But it perform poorly in some really wild dataset.
 My custom dataset is a set of shotcut built from over 156 cartoon videos.
 BEGAN can not show any convergence clues in mine custom dataset.
 However dcgan with batch discriminator can convergent on that.
+
+### [custom dataset] Generator outputs (after 148k step)
+
+![alt tag](./readme/Agg_148400.png)
 
 I will update the result soon.
 
