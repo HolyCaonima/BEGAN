@@ -59,12 +59,12 @@ Sixth, the model will be train and saved every 100 batch. You can continue your 
 <img src="./readme/Agg.png" width="50%">
 
 
-### [Mnist dataset] Autoencoded outputs (only after 3.4k step)
+### [Mnist dataset] Autoencoded outputs (only after 1.6k step)
 
 <img src="./readme/Agg_d_mnist.png" width="50%">
 
 
-### [Mnist dataset] Generator outputs (only after 3.4k step)
+### [Mnist dataset] Generator outputs (only after 1.6k step)
 
 <img src="./readme/Agg_mnist.png" width="50%">
 
